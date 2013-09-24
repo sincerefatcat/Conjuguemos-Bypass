@@ -1,0 +1,63 @@
+if (activityType == "fillin")
+{
+        for (var r = 0; r < answers.length; r++)
+                document.form.elements[r].value = (answers instanceof Array) ? answers[r][0] : answers[r];
+               
+        alert("Done! All answers have been filled in for you.\n\nCreate by Stevie Hetelekides.");
+}
+else
+{
+        if (start == 0)
+        {
+                if (activityType == "vocabulary")
+                        {
+                jQuery.ajax('/au.php?x=sa&t='+activityType);
+                                randomizeList("yes");
+                setvariable();
+                }
+                else if (activityType == "verbs")
+                        {
+                jQuery.ajax('/au.php?x=sa&t='+activityType);
+                howToSelectVerbs('yes');
+                setvariable();
+                }
+                        else
+                                jQuery.ajax('/au.php?x=sa&t='+activityType);
+        }
+ 
+        var getCorrect = parseInt(prompt("How many would you like to get correct?", 1));
+        var getIncorrect = parseInt(prompt("How many would you like to get incorrect?", 1));
+ 
+        var qTime = parseInt(prompt("How much time would you like each question to take? (in seconds)", 33));
+        var totalSecs = (getCorrect + getIncorrect) * qTime;
+        tmin = Math.round(totalSecs / 60);
+        tsec = Math.round(totalSecs % 60);
+ 
+        if(tmin > 59)
+        {
+                tmin = 59;
+                tsec = 58;
+        }
+ 
+        var yi = 0;
+        for(yi = 0; yi < getIncorrect; yi++)
+        {
+                qTime = false;
+                $('#response').val(solution + yi);
+                verifyAnswer();
+                $("#form").submit();
+        }
+ 
+        for(yi = 0; yi < getCorrect; yi++)
+        {
+                qTime = false;
+                $('#response').val(solution);
+                verifyAnswer();
+                $("#form").submit();
+        }
+        stopClock();
+ 
+        qTime = false;
+       
+        alert("Done! Click 'Print Results', check your results, and if all is good click 'Record/send results'.\n\nCreate by Stevie Hetelekides.");
+}
