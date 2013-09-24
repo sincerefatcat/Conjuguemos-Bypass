@@ -25,10 +25,10 @@ else
                                 jQuery.ajax('/au.php?x=sa&t='+activityType);
         }
  
-        var getCorrect = parseInt(prompt("How many would you like to get correct?", 1));
-        var getIncorrect = parseInt(prompt("How many would you like to get incorrect?", 1));
+        var getCorrect = parseInt(prompt("How many answers do you want correct?", 1));
+        var getIncorrect = parseInt(prompt("How many answers do you want inccorect?", 1));
  
-        var qTime = parseInt(prompt("How much time would you like each question to take? (in seconds)", 33));
+        var qTime = parseInt(prompt("How much time do you want every question to take? (in seconds)", 33));
         var totalSecs = (getCorrect + getIncorrect) * qTime;
         tmin = Math.round(totalSecs / 60);
         tsec = Math.round(totalSecs % 60);
